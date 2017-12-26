@@ -16,12 +16,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mHelloTV = (TextView) findViewById(R.id.tv_hello);
 
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mHelloTV.setText("十年后..");
-            }
-        }, 15000);
+        mHandler.postDelayed(new DoRunAble(mHelloTV), 15000);
+    }
+
+    /**
+     * 静态内部类
+     */
+    private static class DoRunAble implements Runnable {
+        private TextView mTextView;
+
+        public DoRunAble(TextView textView) {
+            mTextView = textView;
+        }
+
+        @Override
+        public void run() {
+            mTextView.setText("十年后..");
+        }
     }
 
 
